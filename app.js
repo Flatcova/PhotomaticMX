@@ -15,7 +15,13 @@ var lodash = require('lodash');
 
 // Configuracion de las Rutas
 
-var indexRouter = require('./routes/index');
+var principalRouter = require('./routes/index');
+var serviciosRouter = require('./routes/main/servicios');
+var portafolioRouter = require('./routes/main/portafolio');
+var contactoRouter = require('./routes/main/contacto');
+var blogRouter = require('./routes/main/blog');
+var sesionRouter = require('./routes/main/sesion-fotos');
+
 var adminRouter = require('./routes/admin/main');
 
 // Configuracion de la Base de Datos
@@ -60,8 +66,14 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
+app.use('/', principalRouter);
+app.use('/Servicios', serviciosRouter);
+app.use('/Portafolio', express.static(__dirname + '/public'), portafolioRouter);
+app.use('/Contacto', contactoRouter);
+app.use('/Blog', blogRouter);
+app.use('/Sesiones', sesionRouter);
+
+app.use('/admin', express.static(__dirname + '/public'), adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
