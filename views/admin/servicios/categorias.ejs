@@ -1,0 +1,55 @@
+<%- layout('admin') -%>
+
+<div class="jumbotron">
+  <h4 class="text-center">Categorias Disponibles</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Informacion</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%for (var i = 0; i < categorias.length; i++) {%>
+        <tr>
+          <td><%= categorias[i].nombre %></td>
+          <td><%= categorias[i].informacion %></td>
+          <td> <a href="<%= categorias[i].linkCategoria %>"><%= categorias[i].linkCategoria %></a> </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="jumbotron">
+    <form method="post">
+      <h4 class="text-center">Agregar nueva categoria</h4>
+
+      <% if (avisos.length > 0) { %>
+        <div class="alert alert-success">
+          <h3><%= avisos %></h3>
+        </div>
+        <% } %>
+
+        <div class="form-group">
+          <label>Nombre de la categoria</label>
+          <input required type="text" class="form-control" id="nombre" placeholder="Ej. Bodas, XV's, Infantil "name="nombre">
+        </div>
+        <div class="form-group">
+          <label>Link de la categoria</label>
+          <input required type="text" class="form-control" id="linkCategoria" placeholder="/Portafolio/(categoria)" name="linkCategoria">
+        </div>
+        <div class="form-group">
+          <label>Direccion de imagen</label>
+          <input required type="text" name="urlPhoto" class="form-control" id="urlPhoto" placeholder="/images/categorias/(categoria).png">
+        </div>
+        <div class="form-group">
+          <label>Descripción de la categoria</label>
+          <input required type="text" name="informacion" class="form-control" id="informacion" placeholder="Descripción breve de la categoria">
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar Categoria </button>
+        </div>
+      </form>
+    </div>

@@ -1,0 +1,43 @@
+<% layout('admin') -%>
+
+<div class="container">
+
+            <div class="col-md-10 col-md-offset-1">
+                <div class="box">
+                    <h1>Registrate</h1>
+
+                    <p class="lead">Aún no te registras?</p>
+                    <p>No esperes mas!! y unete a nuestra comunidad, para conseguir tus componentes al mejor precio!</p>
+
+                    <% if (errors.length > 0) { %>
+                        <div class="alert alert-danger">
+                        <h3><%= errors %></h3>
+                        <p class="text-muted">¿Tienes alguna duda?, <a href="contact.html">Contactanos</a>, estamos a tu disposicion para ayudarte.</p>
+                        </div>
+                    <% } %>
+                        <hr>
+
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Nombre Completo</label>
+                                <input required type="text" class="form-control" id="name" placeholder="Ej. Juan Martinez Lopez"name="name">
+                            </div>
+                            <div class="form-group">
+                                <label>Correo</label>
+                                <input required type="email" class="form-control" id="email"
+                                placeholder="Ej. ejemplo@gmail.com" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input required type="password" name="password" class="form-control" id="password">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Registrate</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <p class="text-center text-muted">¿Ya formas parte?</p>
+                        <p class="text-center text-muted"><a href="/login"><strong>Inicia sesion!</strong></a></p>
+                    </div>
+                </div>
+            </div>

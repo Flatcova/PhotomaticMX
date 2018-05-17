@@ -1,0 +1,55 @@
+<% layout('admin') -%>
+<div>
+  <div class="hipsum">
+    <div class="jumbotron">
+      <input type="file" id="selector" multiple>
+      <button onclick="upload()">Upload</button>
+
+      <div id="status">No uploads</div>
+    </div>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+
+function upload() {
+  [$('#selector')[0].files].forEach(fileObj => {
+    var file = fileObj[0]
+    console.log(file);
+    // Retrieve a URL from our server.
+    retrieveNewURL(file, url => {
+      // Upload the file to the server.
+      uploadFile(file, url)
+    })
+  })
+}
+
+// Request to our Node.js server for an upload URL.
+function retrieveNewURL(file, cb) {
+  $.get(`/admin/home/presignedUrl?name=${file.name}`, (url) => {
+    console.log(url);
+    cb(url.url)
+  })
+}
+
+// Use XMLHttpRequest to upload the file to S3.
+function uploadFile(file, url) {
+  $.ajax({
+      type: 'PUT',
+      url: url,
+      contentType: 'binary/octet-stream',
+      processData: false,
+      data: file
+    })
+    .done(function() {
+      alert('File uploaded');
+    })
+    .fail(function() {
+      alert('File NOT uploaded');
+      console.log( arguments);
+    });
+    return false;
+}
+
+</script>
