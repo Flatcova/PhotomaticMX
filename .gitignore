@@ -39,6 +39,9 @@ jspm_packages/
 #AWS secrets
 config/config.json
 
+#Connections
+config/database.js
+
 # Typescript v1 declaration files
 typings/
 
