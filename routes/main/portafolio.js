@@ -25,8 +25,32 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:categoria', function(req, res, next){
-  res.render('main/portafolio/individuales', {
-    titulo: "Maternidad"
+  var params = {
+    Bucket: 'photomaticmx', /* required */
+    Delimiter: 'photos',
+    EncodingType: 'url',
+    Prefix: 'categorias/'+req.query.cat,
+    Marker: 'categorias/'+req.query.cat,
+    MaxKeys: 100,
+  };
+  console.log(params);
+  s3.listObjects(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    console.log(data);
+    var allFotos = data.Contents.map(obj => {
+      var params = {Bucket: 'photomaticmx', Key: obj.Key};
+      var url = s3.getSignedUrl('getObject', params);
+      var Fotos = {};
+      Fotos={'url':url};
+      return Fotos
+    });
+
+    console.log(allFotos);
+
+    res.render('main/portafolio/individuales', {
+      titulo: req.query.cat,
+      allFotos: allFotos
+    });
   });
 });
 

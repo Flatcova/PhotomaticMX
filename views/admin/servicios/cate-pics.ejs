@@ -8,47 +8,56 @@
     </div>
   </div>
 <script type="text/javascript">
-function upload() {
+async function upload() {
 
   var fileInput = document.getElementById('selector');
   var files = fileInput.files;
   var file;
 
-  for (var i = 0; i < files.length; i++) {
-    console.log(files[i]);
-    file = files[i];
-    retrieveNewURL(file, url => {
-      // Upload the file to the server.
-      uploadFile(file, url)
-    })
+  for (file of files) {
+    await complete(file);
   }
+  window.location.reload();
 }
+
+function complete(file){
+    return retrieveNewURL(file)
+      .then((uploadLink) => {
+          return uploadFile(file, uploadLink);
+      }).then((response) => {
+        console.log('Se subio el archivo');
+      }).catch((err) => {
+        console.log(err);
+      });
+}
+
 // Request to our Node.js server for an upload URL.
-function retrieveNewURL(file, cb) {
-  var catePam = window.location.search.substring(1);
-  $.get(`/admin/servicios/portfolio?name=${file.name}&`+catePam, (url) => {
-    console.log(url);
-    cb(url.url)
-  })
+function retrieveNewURL(file) {
+  var categoriaParam = window.location.search.substring(1);
+  return fetch('/admin/servicios/portfolio?name='+file.name+'&'+categoriaParam)
+    .then((response) => {
+      return response.json();
+    }).then((body) => {
+      return body.url;
+    });
 }
+
 
 // Use XMLHttpRequest to upload the file to S3.
 function uploadFile(file, url) {
-  $.ajax({
-      type: 'PUT',
-      url: url,
-      contentType: 'binary/octet-stream',
-      processData: false,
-      data: file
-    })
-    .done(function() {
-      console.log('Se subio el archivo', file.name);
-      window.location.reload();
-    })
-    .fail(function() {
-      alert('File NOT uploaded');
-      console.log( arguments);
-    });
-    return false;
+  console.log('inside uploadFile');
+  console.log(file);
+  console.log(url);
+  return fetch(url, {
+    method: 'PUT',
+    headers: new Headers({
+      'Content-Type': 'binary/octet-stream'
+    }),
+    body: file
+  }).then((response) => {
+    console.info(response);
+  }).catch((err) => {
+    console.log(err);
+  })
 }
 </script>

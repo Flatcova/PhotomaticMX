@@ -6,30 +6,12 @@
   <h1 class="mt-4 mb-3">Categoria: <%= titulo %></h1>
 
   <div class="row">
+    <%for (var x = 0; x < allFotos.length; x++) {%>
     <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
       <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="images/maternidad/1.jpg" alt=""></a>
+        <img class="card-img-top" src="<%= allFotos[x].url %>" alt="">
       </div>
     </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="images/maternidad/2.jpg" alt=""></a>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="images/maternidad/3.jpg" alt=""></a>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="images/maternidad/4.jpg" alt=""></a>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
-      <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="images/maternidad/5.jpg" alt=""></a>
-      </div>
-    </div>
+    <% } %>
   </div>
 </div>

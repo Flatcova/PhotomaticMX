@@ -52,4 +52,15 @@ router.get('/delete', function(req, res) {
   });
 });
 
+// async/ await 
+// router.get('/delete', async (req, res) => {
+//   try {
+//     const respuesta = await GuardarS3(req.query.id).exec();  
+//     const categoria = await Categoria(info).save();
+//     return res.status(200).json(respuesta);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 module.exports = router;

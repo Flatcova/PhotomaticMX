@@ -11,7 +11,7 @@
           <a href="#"><img class="card-img-top" src="<%= categorias[i].link %>" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="/Portafolio/<%= categorias[i].obj.nombre %>"><%= categorias[i].obj.nombre %></a>
+              <a href="/Portafolio/<%= categorias[i].obj.nombre %>?cat=<%= categorias[i].obj.nombre %>"><%= categorias[i].obj.nombre %></a>
             </h4>
             <p class="card-text"><%= categorias[i].obj.informacion %></p>
           </div>
