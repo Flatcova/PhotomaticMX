@@ -1,0 +1,21 @@
+<% layout('admin') -%>
+<div class="hipsum">
+  <div class="jumbotron">
+    <h4 class="text-center">Categorias Disponibles</h4>
+    <div class="row">
+      <%for (var i = 0; i < categorias.length; i++) {%>
+      <div class="col-lg-4 mb-2">
+        <div class="card h-100 text-center">
+          <img class="card-img-top" src="<%= categorias[i].link %>" alt="">
+          <div class="card-body">
+            <p class="card-text"><%= categorias[i].obj.nombre %></p>
+          </div>
+          <div class="card-footer">
+            <a href="/admin/servicios/fotos?categoria=<%= categorias[i].obj.nombre %>" class="btn btn-primary">Agregar Imagenes</a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

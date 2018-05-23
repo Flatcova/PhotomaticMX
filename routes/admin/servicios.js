@@ -17,21 +17,51 @@ router.get('/', function(req, res, next) {
         }
 });
 
+/* ========================= Actualizar Fotos en categorias ========================= */
+
+router.get('/fotos-categorias', function(req, res, next) {
+  Categorias.find({}, function(err, categorias){
+    var fullCategorias = categorias.map(obj => {
+      var params = {Bucket: 'photomaticmx', Key: 'categorias/'+obj.nombreFoto};
+      // console.log(params);
+      var url = s3.getSignedUrl('getObject', params);
+      var newObj = {};
+      newObj={obj, 'link':url};
+      return newObj
+    });
+    if (req.user) {
+      return res.render('admin/servicios/cate-select',{
+        categorias: fullCategorias
+      });
+    }
+    else return res.redirect('/');
+  });
+});
+
+router.get('/fotos', function(req, res) {
+  if (req.user) {
+    return res.render('admin/servicios/cate-pics');
+  }
+  else return res.redirect('/');
+})
+
+router.get('/portfolio', function(req, res) {
+  var params = {Bucket: 'photomaticmx/categorias/test', Key: req.query.name, ACL: 'authenticated-read', ContentType: 'binary/octet-stream'};
+  s3.getSignedUrl('putObject', params, function (err, url) {
+    res.json({url});
+  });
+});
+
 /* ========================= Actualizar Categorias ========================= */
 
 router.get('/categorias', function(req, res, next) {
 	Categorias.find({}, function(err, categorias){
 	  	if (err) return next(err);
-      console.log(categorias);
 	  	res.render('admin/servicios/categorias', {
 	  		categorias: categorias,
         avisos: req.flash('avisos')
 		  });
 	  });
-});
-
-router.get('/delete', function(req, res) {
-
 });
 
 router.get('/categorias/delete', function(req, res) {
@@ -60,9 +90,9 @@ router.post('/categorias', (req, res) => {
 
     return newCategoria.save()
         .then((categoria) => {
-          console.log(categoria)
-          return res.status(201).json(categoria);
-		      // return res.redirect('/admin/servicios/categorias');
+          console.log(categoria);
+          return res.status(201).json(categoria)
+          // return res.redirect('/admin/servicios/categorias');
         })
         .catch((err) => {
             if(err.code == '11000'){

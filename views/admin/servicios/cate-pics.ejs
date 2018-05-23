@@ -1,0 +1,52 @@
+<% layout('admin') -%>
+  <div class="hipsum">
+    <div class="jumbotron">
+      <input type="file" id="selector" multiple>
+      <button onclick="upload()">Upload</button>
+
+      <div id="status">Subir fotos para el carrousel, preferencia que sean de 1900x1080</div>
+    </div>
+  </div>
+<script type="text/javascript">
+function upload() {
+  var fileInput = document.getElementById('selector');
+  var files = fileInput.files;
+  var file;
+
+  for (var i = 0; i < files.length; i++) {
+    console.log(files[i]);
+    file = files[i];
+    retrieveNewURL(file, url => {
+      // Upload the file to the server.
+      uploadFile(file, url)
+    })
+  }
+}
+// Request to our Node.js server for an upload URL.
+function retrieveNewURL(file, cb) {
+  $.get(`/admin/servicios/portfolio?name=${file.name}`, (url) => {
+    console.log(url);
+    cb(url.url)
+  })
+}
+
+// Use XMLHttpRequest to upload the file to S3.
+function uploadFile(file, url) {
+  $.ajax({
+      type: 'PUT',
+      url: url,
+      contentType: 'binary/octet-stream',
+      processData: false,
+      data: file
+    })
+    .done(function() {
+      console.log('Se subio el archivo', file.name);
+      window.location.reload();
+    })
+    .fail(function() {
+      alert('File NOT uploaded');
+      console.log( arguments);
+    });
+    return false;
+}
+</script>
