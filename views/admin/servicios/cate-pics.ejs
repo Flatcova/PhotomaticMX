@@ -9,6 +9,7 @@
   </div>
 <script type="text/javascript">
 function upload() {
+
   var fileInput = document.getElementById('selector');
   var files = fileInput.files;
   var file;
@@ -24,7 +25,8 @@ function upload() {
 }
 // Request to our Node.js server for an upload URL.
 function retrieveNewURL(file, cb) {
-  $.get(`/admin/servicios/portfolio?name=${file.name}`, (url) => {
+  var catePam = window.location.search.substring(1);
+  $.get(`/admin/servicios/portfolio?name=${file.name}&`+catePam, (url) => {
     console.log(url);
     cb(url.url)
   })

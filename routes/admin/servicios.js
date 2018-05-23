@@ -46,7 +46,7 @@ router.get('/fotos', function(req, res) {
 })
 
 router.get('/portfolio', function(req, res) {
-  var params = {Bucket: 'photomaticmx/categorias/test', Key: req.query.name, ACL: 'authenticated-read', ContentType: 'binary/octet-stream'};
+  var params = {Bucket: 'photomaticmx/categorias/'+req.query.categoria, Key: req.query.name, ACL: 'authenticated-read', ContentType: 'binary/octet-stream'};
   s3.getSignedUrl('putObject', params, function (err, url) {
     res.json({url});
   });
