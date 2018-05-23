@@ -38,12 +38,43 @@ router.get('/fotos-categorias', function(req, res, next) {
   });
 });
 
-router.get('/fotos', function(req, res) {
-  if (req.user) {
-    return res.render('admin/servicios/cate-pics');
-  }
-  else return res.redirect('/');
-})
+router.get('/fotos', function(req, res, next) {
+  var params = {
+    Bucket: 'photomaticmx', /* required */
+    Delimiter: 'photos',
+    EncodingType: 'url',
+    Prefix: 'categorias/'+req.query.categoria,
+    Marker: 'categorias/'+req.query.categoria,
+    MaxKeys: 100,
+  };
+  s3.listObjects(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+
+    var KeysArray = data.Contents.map(obj => {
+      var params = {Bucket: 'photomaticmx', Key: obj.Key};
+      var url = s3.getSignedUrl('getObject', params);
+      var Fotos = {};
+      Fotos={'nombre':obj.Key, 'url':url};
+      return Fotos
+    });
+    console.log(KeysArray);
+      if (req.user) {
+        return res.render('admin/servicios/cate-pics', {
+          fotos : KeysArray
+        });
+      }else{
+        return res.redirect('/');
+      }
+  });
+});
+
+router.get('/delete', function(req, res) {
+  var params = {Bucket: 'photomaticmx', Key: req.query.key};
+  s3.deleteObject(params, function(err, data) {
+    if (err) console.log(err, err.stack); // an error occurred
+    res.redirect('back');
+  });
+});
 
 router.get('/portfolio', function(req, res) {
   var params = {Bucket: 'photomaticmx/categorias/'+req.query.categoria, Key: req.query.name, ACL: 'authenticated-read', ContentType: 'binary/octet-stream'};

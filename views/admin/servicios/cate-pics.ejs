@@ -1,10 +1,31 @@
 <% layout('admin') -%>
   <div class="hipsum">
     <div class="jumbotron">
+      <a href="/admin/servicios/fotos-categorias" class="btn btn-primary">Regresar</a>
+      <div class="float-right">
+
       <input type="file" id="selector" multiple>
       <button onclick="upload()">Upload</button>
 
       <div id="status">Subir fotos para el carrousel, preferencia que sean de 1900x1080</div>
+      </div>
+    </div>
+    <div class="jumbotron">
+      <div class="row">
+        <%for (var i = 0; i < fotos.length; i++) {%>
+        <div class="col-lg-4 mb-2">
+          <div class="card h-100 text-center">
+            <img class="card-img-top" src="<%= fotos[i].url %>" alt="">
+            <div class="card-body">
+              <p class="card-text"><%= fotos[i].nombre %></p>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/servicios/delete?key=<%= fotos[i].nombre %>" class="btn btn-primary">Eliminar</a>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
     </div>
   </div>
 <script type="text/javascript">
