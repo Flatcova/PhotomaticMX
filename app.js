@@ -23,8 +23,10 @@ var blogRouter = require('./routes/main/blog');
 var sesionRouter = require('./routes/main/sesion-fotos');
 
 var adminRouter = require('./routes/admin/main');
+var adminAddRouter = require('./routes/admin/administradores');
 var adminOutRouter = require('./routes/admin/logout');
 var adminHome = require('./routes/admin/home');
+var adminServices = require('./routes/admin/servicios');
 
 // Configuracion de la Base de Datos
 var configDB = require('./config/database.js')
@@ -77,8 +79,9 @@ app.use('/Blog', blogRouter);
 app.use('/Sesiones', sesionRouter);
 
 app.use('/admin', express.static(__dirname + '/public'), adminRouter);
+app.use('/admin/administradores', express.static(__dirname + '/public'), adminAddRouter);
 app.use('/admin/home', express.static(__dirname + '/public'), adminHome);
-app.use('/admin/servicios', express.static(__dirname + '/public'), adminRouter);
+app.use('/admin/servicios', express.static(__dirname + '/public'), adminServices);
 app.use('/logout', adminOutRouter);
 
 // catch 404 and forward to error handler

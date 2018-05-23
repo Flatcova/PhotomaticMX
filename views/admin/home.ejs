@@ -1,14 +1,29 @@
 <% layout('admin') -%>
-<div>
   <div class="hipsum">
     <div class="jumbotron">
       <input type="file" id="selector" multiple>
       <button onclick="upload()">Upload</button>
 
-      <div id="status">No uploads</div>
+      <div id="status">Subir fotos para el carrousel, preferencia que sean de 1900x1080</div>
+    </div>
+    <div class="jumbotron">
+      <div class="row">
+        <%for (var i = 0; i < fotos.length; i++) {%>
+        <div class="col-lg-4 mb-2">
+          <div class="card h-100 text-center">
+            <img class="card-img-top" src="<%= fotos[i].url %>" alt="">
+            <div class="card-body">
+              <p class="card-text"><%= fotos[i].nombre %></p>
+            </div>
+            <div class="card-footer">
+              <a href="/admin/home/delete?key=<%= fotos[i].nombre %>" class="btn btn-primary">Eliminar</a>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </div>
     </div>
   </div>
-</div>
 
 <script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
@@ -44,6 +59,7 @@ function uploadFile(file, url) {
     })
     .done(function() {
       alert('File uploaded');
+      window.location.reload();
     })
     .fail(function() {
       alert('File NOT uploaded');
