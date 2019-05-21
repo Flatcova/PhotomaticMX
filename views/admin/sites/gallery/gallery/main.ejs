@@ -1,0 +1,22 @@
+<%- layout ('admin') -%>
+
+<div class="row">
+  <%for (var i = 0; i < data.length; i++) {%>
+    <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
+        <div class="card card-bordered">
+            <img class="card-img-top img-fluid" src="<%= data[i].img_URL %>" alt="image">
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="mb-3"><%= data[i].titulo %>.</h5>
+                </div>
+                <p class="card-text">
+                  <%= data[i].descripcion %>
+                </p>
+                <div class="text-center">
+                  <a href="/admin/gallery/photos-<%= data[i].s3_name %>" class="btn btn-dark"><i class="fas fa-images"></i> Entrar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

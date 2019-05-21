@@ -1,24 +1,39 @@
-<% layout('layout') -%>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/assets/img/logo-img/AppIcon.png" />
 
-<div class="container">
+    <title>Az Works</title>
 
-  <section>
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2">
-          <div class="p-5">
-            <img class="rounded-circle" style="height:400px; width:400px;"src="/images/Error.jpg" alt="">
-          </div>
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:400"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Passion+One"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="assets/css/font-awesome.min.css"
+    />
+    <link type="text/css" rel="stylesheet" href="assets/style-404.css" />
+  </head>
+  <body>
+    <div id="notfound">
+      <div class="notfound-bg"></div>
+      <div class="notfound">
+        <div class="notfound-404"><h1>404</h1></div>
+        <h2>Oops! Esta pagina no existe</h2>
+        <div class="notfound-social">
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-instagram"></i></a>
         </div>
-        <div class="col-lg-6 order-lg-1">
-          <div class="p-5">
-            <h2>No se pudo encontrar la pagina solictada</h2>
-            <h3 class="display-4"><%= error.status %></h3>
-            <p><%= message %></p>
-            <pre><%= error.stack %></pre>
-          </div>
-        </div>
+        <a href="/">Volver a la pagina Principal</a>
       </div>
     </div>
-  </section>
-</div>
+  </body>
+</html>

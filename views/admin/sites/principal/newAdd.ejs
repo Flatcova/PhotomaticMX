@@ -1,0 +1,111 @@
+<% layout('./admin') -%>
+<div class="row">
+  <div class="col-lg-12 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <div class="media-body">
+          <h4 class="mb-3">Nuevo Aviso Principal</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-5">
+    <div class="card">
+      <div id="form">
+      <div class="card-body">
+        <h4 class="header-title">Ingresa la informacion Solicitada</h4>
+        <label for="example-text-input" class="col-form-label">Imagen de Fondo (1200px x 1800px)</label>
+        <input type="file" id="selector" single name="img_URL" class="input-group-text" accept="image/jpeg, image/jpeg, image/x-png">
+
+        <!-- <div class="input-group mb3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" >Upload</span>
+          </div>
+          <div class="custom-file">
+
+            <input type="file" single class="custom-file-input" id="inputGroupFile01" name="imagen">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div> -->
+
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Titulo</label>
+          <input class="form-control" type="text" id="titulo-input" name="titulo">
+        </div>
+        <div class="form-group">
+          <label for="descripcion-input" class="col-form-label">Descripción</label>
+          <input class="form-control" type="search" id="descripcion-input" name="descripcion">
+        </div>
+        <div style="text-align:center;">
+          <button type="submit" onclick="upload()" class="btn btn-primary mb-3 col-sm-4 order-4 " >
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function upload() {
+  [$('#selector')[0].files].forEach(fileObj => {
+    var file = fileObj[0]
+    console.log(file);
+    // Retrieve a URL from our server.
+    retrieveNewURL(file, url => {
+      // Upload the file to the server.
+      uploadFile(file, url)
+    })
+  })
+}
+
+// Request to our Node.js server for an upload URL.
+function retrieveNewURL(file, cb) {
+  $.get(`/admin/landing/newAdd/Url?name=${file.name}`, (url) => {
+    console.log(url);
+    cb(url.url)
+  })
+}
+
+// Use XMLHttpRequest to upload the file to S3.
+  function uploadFile(file, url) {
+    console.log(file);
+    console.log(url);
+
+    const content = {
+      titulo: $('input[name=titulo]').val(),
+      descripcion: $('input[name=descripcion]').val(),
+      img_URL: file.name
+    };
+
+    return Promise.all([
+      fetch(url, {
+          method: 'PUT',
+          headers: new Headers({
+            'Content-Type': 'binary/octet-stream'
+          }),
+          body: file
+        }),
+      fetch('/admin/landing/newAdd', {
+            method: 'POST',
+            headers: new Headers({
+              'Content-Type': 'application/json'
+            }),
+            cache: 'no-cache',
+            body: JSON.stringify(content)
+      })
+    ]).then((response) => {
+      console.info(response);
+      const file = response[0];
+      const basaDeDatos = response[1];
+      // logica
+      window.location.reload();
+    }).catch((err)=>{
+      //manejo de error
+      console.error(err);
+    });
+  }
+</script>

@@ -1,0 +1,86 @@
+<% layout('admin') -%>
+
+<div class="col-lg-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+                <div class="media-body">
+                    <h4 class="mb-3">Agreagar Fotos para <%= data.nombre %></h4>
+                    <input hidden type="text" name="acceso" value="<%= data.codigo_Acceso %>">
+                </div>
+                <input class="btn btn-" type="file" id="selector" multiple accept="image/jpeg, image/jpeg, image/x-png">
+                <button onclick="upload()" class="btn btn-success">Upload</button>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+
+  <%for (var i = 0; i < fotos.length; i++) {%>
+
+  <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
+        <div class="card card-bordered">
+            <img class="card-img-top img-fluid" src="<%= fotos[i].url %>" alt="image">
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="mb-3"><%= fotos[i].nombre %></h5>
+                </div>
+                <div class="text-center">
+                  <a href="/admin/clientPhotos/deletePhoto?key=<%= fotos[i].s3_key %>" class="btn btn-dark"><i class="fas fa-images"></i> Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
+<script type="text/javascript">
+async function upload() {
+
+  var fileInput = document.getElementById('selector');
+  var files = fileInput.files;
+  var file;
+
+  for (file of files) {
+    await complete(file);
+  }
+  window.location.reload();
+}
+
+function complete(file){
+    return retrieveNewURL(file)
+      .then((uploadLink) => {
+          return uploadFile(file, uploadLink);
+      }).then((response) => {
+        console.log('Se subio el archivo');
+      }).catch((err) => {
+        console.log(err);
+      });
+}
+
+// Request to our Node.js server for an upload URL.
+function retrieveNewURL(file) {
+  var categoriaParam = window.location.href.split('-').pop();
+  return fetch('/admin/clientPhotos/photoUrl?name='+file.name+'&codigo='+$("[name=acceso]").val())
+    .then((response) => { return response.json(); })
+    .then((body) => {
+      return body.url;
+    });
+}
+
+
+// Use XMLHttpRequest to upload the file to S3.
+function uploadFile(file, url) {
+  console.log('inside uploadFile');
+  console.log(file);
+  console.log(url);
+  return fetch(url, {
+    method: 'PUT',
+    headers: new Headers({
+      'Content-Type': 'binary/octet-stream'
+    }),
+    body: file
+  }).then((response) => {
+    console.info(response);
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+</script>

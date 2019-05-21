@@ -1,71 +1,109 @@
 <% layout('admin') -%>
-  <div class="hipsum">
-    <div class="jumbotron">
-      <input type="file" id="selector" single>
-      <button onclick="upload()">Upload</button>
-
-      <div id="status">Subir fotos para el carrousel, preferencia que sean de 1900x1080</div>
-    </div>
-    <div class="jumbotron">
+<div class="row">
+<!-- seo fact area start -->
+  <div class="col-lg-8">
       <div class="row">
-        <%for (var i = 0; i < fotos.length; i++) {%>
-        <div class="col-lg-4 mb-2">
-          <div class="card h-100 text-center">
-            <img class="card-img-top" src="<%= fotos[i].url %>" alt="">
-            <div class="card-body">
-              <p class="card-text"><%= fotos[i].nombre %></p>
-            </div>
-            <div class="card-footer">
-              <a href="/admin/home/delete?key=<%= fotos[i].nombre %>" class="btn btn-primary">Eliminar</a>
-            </div>
+          <div class="col-md-6 mt-5 mb-3">
+              <div class="card">
+                  <div class="seo-fact sbg1">
+                      <div class="p-4 d-flex justify-content-between align-items-center">
+                          <div class="seofct-icon"><i class="ti-camera"></i> </div>
+                          <h2>100</h2>
+                      </div>
+                      <canvas id="seolinechart1" height="50"></canvas>
+                  </div>
+              </div>
           </div>
-        </div>
-        <% } %>
+          <div class="col-md-6 mt-md-5 mb-3">
+              <div class="card">
+                  <div class="seo-fact sbg2">
+                      <div class="p-4 d-flex justify-content-between align-items-center">
+                          <div class="seofct-icon"><i class="ti-share"></i> Share</div>
+                          <h2>3,984</h2>
+                      </div>
+                      <canvas id="seolinechart2" height="50"></canvas>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 mb-3 mb-lg-0">
+              <div class="card">
+                  <div class="seo-fact sbg3">
+                      <div class="p-4 d-flex justify-content-between align-items-center">
+                          <div class="seofct-icon">Impressions</div>
+                          <canvas id="seolinechart3" height="60"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="seo-fact sbg4">
+                      <div class="p-4 d-flex justify-content-between align-items-center">
+                          <div class="seofct-icon">Clientes</div>
+                          <canvas id="seolinechart4" height="60"></canvas>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
+  <!-- seo fact area end -->
+  <!-- Social Campain area start -->
+  <div class="col-lg-4 mt-5">
+      <div class="card">
+          <div class="card-body pb-0">
+              <h4 class="header-title">Social ads Campain</h4>
+              <div id="socialads" style="height: 245px;"></div>
+          </div>
+      </div>
+  </div>
+  <!-- Social Campain area end -->
+  <!-- Statistics area start -->
+  <div class="col-lg-8 mt-5">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="header-title">User Statistics</h4>
+              <div id="user-statistics"></div>
+          </div>
+      </div>
+  </div>
+  <!-- Statistics area end -->
+  <!-- Advertising area start -->
+  <div class="col-lg-4 mt-5">
+      <div class="card h-full">
+          <div class="card-body">
+              <h4 class="header-title">Advertising & Marketing</h4>
+              <canvas id="seolinechart8" height="233"></canvas>
+          </div>
+      </div>
+  </div>
+  <!-- Advertising area end -->
 
-<script src="//code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript">
-
-function upload() {
-  [$('#selector')[0].files].forEach(fileObj => {
-    var file = fileObj[0]
-    console.log(file);
-    // Retrieve a URL from our server.
-    retrieveNewURL(file, url => {
-      // Upload the file to the server.
-      uploadFile(file, url)
-    })
-  })
-}
-
-// Request to our Node.js server for an upload URL.
-function retrieveNewURL(file, cb) {
-  $.get(`/admin/home/presignedUrl?name=${file.name}`, (url) => {
-    console.log(url);
-    cb(url.url)
-  })
-}
-
-// Use XMLHttpRequest to upload the file to S3.
-function uploadFile(file, url) {
-  $.ajax({
-      type: 'PUT',
-      url: url,
-      contentType: 'binary/octet-stream',
-      processData: false,
-      data: file
-    })
-    .done(function() {
-      alert('File uploaded');
-      window.location.reload();
-    })
-    .fail(function() {
-      alert('File NOT uploaded');
-      console.log( arguments);
-    });
-    return false;
-}
-
-</script>
+  <div class="col-lg-12 card mt-5">
+      <div class="card-body">
+          <h4 class="header-title">Sesiones de hoy</h4>
+          <div class="table-responsive">
+              <table class="dbkit-table">
+                  <tbody>
+                      <tr class="heading-td">
+                          <td>Product Name</td>
+                          <td>Product Code</td>
+                          <td>Order Status</td>
+                          <td>Client Number</td>
+                          <td>Zip Code</td>
+                          <td>View Order</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="pagination_area pull-right mt-5">
+              <ul>
+                  <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</div>

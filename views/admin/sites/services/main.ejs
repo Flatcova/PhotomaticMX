@@ -1,0 +1,45 @@
+<% layout('admin') -%>
+<!-- color pricing start -->
+<div class="row">
+  <div class="col-lg-12 mt-5">
+    <div class="card">
+        <div class="card-body">
+                <div class="media-body">
+                    <h4 class="mb-3">Servicios Disponibles</h4>
+                    Crea tus propios servicios para que tus clientes sepan todas
+                    tus promociones y asi conocer mas sobre todo lo que ofreces.
+                </div>
+                <a href="/admin/services/newService">
+                  <button type="button" class="btn btn-info mb-3"><i class="fas fa-plus-square"></i> Nuevo Servicio</button>
+                </a>
+        </div>
+    </div>
+  </div>
+    <%for (var i = 0; i < data.length; i++) {%>
+  <div class="col-xl-3 col-ml-6 col-mdl-4 col-sm-6 mt-5">
+      <div class="card">
+          <div class="pricing-list">
+              <div class="prc-head">
+                  <h4><%= data[i].nombre %></h4>
+              </div>
+              <div class="prc-list">
+                  <ul>
+                      <li class="bold"><a style="font-size: x-large;">Precio: $<%= data[i].precio%></a></li>
+                      <li><a>Cambios: <%= data[i].cambios%></a></li>
+                      <li><a>Ubicaciones: <%= data[i].ubicaciones%></a></li>
+                      <li><a>Duracion: <%= data[i].duracion%></a></li>
+                      <li><a>Fotos: <%= data[i].cant_fotos%></a></li>
+                      <li><a>Informacion: <%= data[i].info%></a></li>
+                  </ul>
+                  creado : <%= data[i].fecha%>
+                  <br>
+                  <a href="/admin/services/edit?id=<%= data[i]._id %>">Editar Paquete</a>
+                  <a href="/admin/services/delete?id=<%= data[i]._id %>" style="background: #c82333;">Borrar Paquete</a>
+              </div>
+          </div>
+      </div>
+  </div>
+  <% } %>
+
+</div>
+<!-- color pricing end -->

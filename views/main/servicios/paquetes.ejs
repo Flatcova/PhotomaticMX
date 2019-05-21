@@ -1,70 +1,65 @@
 <!-- <% layout('layout') -%> -->
 
-<div class="container">
-
-  <!-- Page Heading/Breadcrumbs -->
-  <h1 class="mt-4 mb-3">Pricing
-    <small>Subheading</small>
-  </h1>
-
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Paquetes</li>
-    <li class="breadcrumb-item disable">Calendarizacion</li>
-    <li class="breadcrumb-item">Forma de Pago</li>
-    <li class="breadcrumb-item">Resumen</li>
-  </ol>
-
-  <!-- Content Row -->
-  <div class="row">
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h3 class="card-header">Personal</h3>
-        <img src="/images/paquetes/paquete-perso.jpg" alt="" style="height: auto; max-width: 100%;">
-        <div class="card-body">
-          <div class="display-4">$500.00</div>
-          <div class="font-italic">paquete por persona</div>
+  <!-- Breadcrumb Area Start -->
+  <section
+    class="breadcrumb-area bg-img bg-overlay jarallax"
+    style="background-image: url(assets/img/bg-img/38.jpg);"
+  >
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <div class="breadcrumb-content text-center">
+            <h2 class="page-title">Servicios</h2>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio anisu i iu aiub au ib aub iu</li>
-          <li class="list-group-item" style="text-align:center">
-            <a href="/" class="btn btn-primary">Contratar</a>
-          </li>
-        </ul>
       </div>
     </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card card-outline-primary h-100">
-        <h3 class="card-header bg-primary text-white">Love Story</h3>
-
-        <img src="/images/paquetes/paquete-love.jpg" alt="" style="max-height:auto; max-width: 100%;">
-        <div class="card-body">
-          <div class="display-4">$1000.00</div>
+  </section>
+  <!-- Breadcrumb Area End -->
+  <!-- Why Choose Us Area Start -->
+  <section class="why-choose-us-area bg-gray section-padding-80-0 clearfix">
+    <div class="container">
+      <div class="row">
+        <%for (var i = 0; i < data.length; i++) {%>
+        <!-- Single Why Choose Area -->
+        <div class="col-md-6 col-lg-3">
+          <div
+            class="why-choose-us-content text-center mb-80 wow fadeInUp"
+            data-wow-delay="100ms"
+          >
+            <div class="chosse-us-icon">
+              <i class="fa fa-camera-retro" aria-hidden="true"></i>
+            </div>
+            <h4><%= data[i].nombre %></h4>
+            <h2>$<%= data[i].precio%></h2>
+            <div class="line"></div>
+            <table class="table">
+              <%if (data[i].cambios.length > 2){%>
+                <tr>
+                  <td>Cambios <strong><%= data[i].cambios%></strong></td>
+                </tr>
+              <%}else{%>
+                <tr>
+                  <td><strong><%= data[i].cambios%></strong> Cambio de Ropa</td>
+                </tr>
+              <%}%>
+              <tr>
+                <td><strong><%= data[i].ubicaciones%></strong> Ubicación</td>
+              </tr>
+              <tr>
+                <td><strong><%= data[i].duracion%> Hrs</strong> de Captura</td>
+              </tr>
+              <tr>
+                <td>Total de: <strong><%= data[i].cant_fotos%></strong> Fotos</td>
+              </tr>
+              <tr>
+                <td><strong>Detalle: </strong> <%= data[i].info%></td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item" style="text-align:center">
-            <a href="/" class="btn btn-primary">Contratar</a>
-          </li>
-        </ul>
+        <% } %>
       </div>
     </div>
-    <div class="col-lg-4 mb-4">
-      <div class="card h-100">
-        <h3 class="card-header">Evento</h3>
-        <img src="/images/paquetes/paquete-evento.jpg" alt="" style="height: auto; max-width: 100%;">
-        <div class="card-body">
-          <div class="display-4">$1500.00</div>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Vestibulum at eros</li>
-          <li class="list-group-item" style="text-align:center">
-            <a href="/" class="btn btn-primary">Contratar</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- /.row -->
-
-</div>
-<!-- /.container -->
+  </section>
+  <!-- Why Choose  us Area End -->

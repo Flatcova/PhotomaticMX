@@ -1,0 +1,40 @@
+<%- layout ('admin') -%>
+<div class="row">
+  <div class="col-lg-12 mt-5">
+      <div class="card">
+          <div class="card-body">
+                  <div class="media-body">
+                      <h4 class="mb-3">Categorias de tu Portafolio</h4>
+                      Aquí es donde todo cobra vida, crea tus propias categorias dentro
+                      de tu portafolio para mostrar tus trabajos al mundo.
+                  </div>
+                  <a href="/admin/gallery/newPortfolio">
+                    <button type="button" class="btn btn-info mb-3"><i class="fas fa-plus-square"></i> Crear Nueva Categoria</button>
+                  </a>
+          </div>
+      </div>
+    </div>
+  <%for (var i = 0; i < data.length; i++) {%>
+  <div class="col-lg-6 mt-5">
+      <div class="card">
+          <div class="card-body">
+              <div class="media mb-5">
+                  <img class="img-fluid mr-4" style="width: 30%;" src="<%= data[i].img_URL %>" alt="image">
+                  <div class="media-body">
+                      <h4 class="mb-3"><%= data[i].titulo %></h4>
+                      <%= data[i].descripcion %>
+                  </div>
+                  <ul>
+                    <li>
+                      <a href="/admin/gallery/portfolioEdit?id=<%= data[i]._id %>" class="btn btn-info mb-3"><i class="fas fa-edit"></i> Editar</a>
+                    </li>
+                    <li>
+                      <a href="/admin/gallery/portfolioDelete?id=<%= data[i]._id %>" class="btn btn-danger mb-3"><i class="fas fa-trash"></i> Borrar</a>
+                    </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+    <% } %>
+</div>

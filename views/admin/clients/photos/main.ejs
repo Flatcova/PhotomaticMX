@@ -1,0 +1,26 @@
+<% layout('./admin') -%>
+<div class="row">
+  <div class="col-lg-12 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <div class="media-body">
+          <h4 class="mb-3">Fotografias de Clientes</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-5">
+    <div class="list-group">
+      <%for (var i = 0; i < data.length; i++) {%>
+      <a href="/admin/clientPhotos/photos-<%= data[i]._id %>&<%= data[i].codigo_Acceso %>" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= data[i].nombre %> <%= data[i].apellidos %></h5>
+              <small><%= moment(data[i].created_At).locale('es').format('ll') %></small>
+          </div>
+          <p class="mb-1"><b>Paquete Seleccionado: </b><%= data[i].servicio.nombre%></p>
+          <small><b>Estatus: </b> <%= data[i].status %></small>
+      </a>
+      <% } %>
+    </div>
+  </div>
+</div>

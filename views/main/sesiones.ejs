@@ -1,0 +1,36 @@
+<%- layout ('layout') -%>
+
+<!-- Gallery Area Start -->
+    <div class="alime-portfolio-area section-padding-80 clearfix">
+      <div class="container-fluid">
+        <div class="row h-100 align-items-center">
+          <div class="col-12">
+            <div class="breadcrumb-content text-center" style="margin-top:none; margin:30px;">
+              <h2 class="page-title">Fotos de : <%= data.nombre %> <%= data.apellidos %></h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row alime-portfolio">
+          <%for (var x = 0; x < fotos.length; x++) {%>
+          <!-- Single Gallery Item -->
+          <div
+            class="col-12 col-sm-6 col-lg-4 single_gallery_item mb-30 wow fadeInUp"
+            data-wow-delay="100ms"
+            style="text-align: center;"
+          >
+            <div class="single-portfolio-content">
+              <img src="<%= fotos[x].url %>" alt="" />
+              <div class="hover-content">
+                <a href="<%= fotos[x].url %>" class="portfolio-img">+</a>
+              </div>
+            </div>
+            <a class="btn alime-btn btn-2 mt-30 wow fadeInUp" download="<%= fotos[x].nombre %>" href="<%= fotos[x].url %>" title="<%= fotos[x].nombre %>">
+              Descargar
+            </a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <!-- Gallery Area End -->

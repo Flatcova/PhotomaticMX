@@ -1,10 +1,13 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var categoriasSchema = new Schema({
-		nombre: {type:String, unique: true},
-		nombreFoto: { type: String },
-		informacion: { type: String }
+  titulo: { type: String, unique: true },
+  s3_name: { type: String, unique: true },
+  descripcion: { type: String },
+  createdBy: { type: Schema.Types.ObjectId, ref: "User" },
+  created_At: { type: Date },
+  img_name: { type: String }
 });
 
-module.exports = mongoose.model('Categorias', categoriasSchema);
+module.exports = mongoose.model("Categorias", categoriasSchema);

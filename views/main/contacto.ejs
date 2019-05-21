@@ -1,210 +1,118 @@
 <% layout('layout') -%>
-
-<style media="screen">
-  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700,900");
-  * {
-  margin: 0;
-  padding: 0;
-  }
-
-  .layout-center {
-  margin: 0 auto;
-  max-width: 1024px;
-  }
-
-  .wrapper {
-  font: 300 16px/24px 'Roboto', sans-serif;
-  }
-
-  .clearfix:after {
-  clear: both;
-  content: ".";
-  display: block;
-  height: 0;
-  visibility: hidden;
-  font-size: 0;
-  }
-
-  .header-wrap {
-  background: #58ade7;
-  padding: 10px;
-  }
-  .header-wrap .layout-center {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  }
-  .header-wrap .branding {
-  width: 25%;
-  }
-  .header-wrap .branding img {
-  display: block;
-  width: 150px;
-  }
-  .header-wrap .menu {
-  width: 75%;
-  }
-  .header-wrap .menu ul {
-  text-align: right;
-  }
-  .header-wrap .menu ul li {
-  display: inline-block;
-  }
-  .header-wrap .menu ul li a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 20px;
-  }
-  .header-wrap .menu ul li a:hover {
-  color: #333;
-  }
-
-  .map-wrap {
-  width: 100%;
-  }
-  .map-wrap iframe {
-  width: 100%;
-  display: block;
-  pointer-events: none;
-  position: relative;
-  /* IE needs a   position other than static */
-  }
-  .map-wrap iframe.clicked {
-  pointer-events: auto;
-  }
-
-  .content-wrap {
-    padding-top: 15%;
-    padding-bottom: 100px;
-  }
-  .content-wrap .form-wrap {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  box-shadow: 0px 0px 30px #b7b7b7;
-  margin-top: -100px;
-  position: relative;
-  z-index: 10;
-  background: #fff;
-  }
-  .content-wrap .form-wrap h2.sub-title {
-  font-size: 21px;
-  font-weight: 400;
-  margin-bottom: 30px;
-  color: #5d5d5d;
-  }
-  .content-wrap .form-wrap .form-block {
-  box-sizing: border-box;
-  padding: 40px;
-  width: 70%;
-  }
-  .content-wrap .form-wrap .address-block {
-  background: #5d5d5d;
-  box-sizing: border-box;
-  color: #fff;
-  padding: 40px;
-  width: 30%;
-  }
-  .content-wrap .form-wrap .address-block h2.sub-title {
-  color: #fff;
-  }
-  .content-wrap .form-wrap .address-block ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  }
-  .content-wrap .form-wrap .address-block ul li {
-  display: block;
-  margin-bottom: 10px;
-  }
-
-  .form-item {
-  margin-bottom: 10px;
-  with: 50%;
-  }
-  .form-item label {
-  display: block;
-  font-size: 14px;
-  line-height: 20px;
-  color: #6a7986;
-  }
-  .form-item input {
-  border: none;
-  border-bottom: 1px solid #dddddd;
-  padding: 10px;
-  box-sizing: border-box;
-  width: 100%;
-  }
-  .form-item textarea {
-  border: 1px solid #dddddd;
-  box-sizing: border-box;
-  padding: 10px;
-  width: 100%;
-  }
-
-  .footer-wrap {
-  background: #fafafb;
-  border-top: 1px solid #f6f6f6;
-  padding: 40px 0;
-  }
-  .footer-wrap p {
-  text-align: center;
-  color: #95a2b4;
-  }
-</style>
-
-<div class="wrapper">
-	<div class="content-wrap">
-		<div class="layout-center">
-      <div class="form-wrap">
-        <div class="form-block">
-          <h2 class="sub-title">Envianos un mensaje</h2>
-          <form action="" class="contact">
-            <div class="form-item">
-              <label for="">Nombre Completo</label>
-              <input type="text">
-             </div>
-             <div class="form-item">
-              <label for="">Correo</label>
-              <input type="text">
-             </div>
-            <div class="form-item">
-              <label for="">Telefono</label>
-              <input type="text">
-             </div>
-            <div class="form-item">
-              <label for="">Asunto</label>
-              <input type="text">
-             </div>
-            <div class="form-item">
-              <label for="">Mensaje</label>
-              <textarea id="edit-message" name="message" rows="5" cols="60" class="form-textarea required resize-vertical"></textarea>
-             </div>
-            <div class="form-item">
-              <input class="button form-submit"  type="submit" name="op" value="Mandar mensaje">
-            </div>
-            </form>
+  <!-- Breadcrumb Area Start -->
+  <section
+    class="breadcrumb-area bg-img bg-overlay jarallax"
+    style="background-image: url(assets/img/bg-img/38.jpg);"
+  >
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <div class="breadcrumb-content text-center">
+            <h2 class="page-title">Contacto</h2>
           </div>
-        <div class="address-block">
-          <h2 class="sub-title">Photomatic MX.</h2>
-          <ul>
-            <li>Ofrecemos servicio de sesiones fotograficas con estilo unico y creativo. <br> conserva tus recuerdos para siempre a traves de nuestras fotografias. </li>
-            <br>
-            <h4 class="sub-title">Contactanos</h4>
-            <li><i class="fa fa-phone"></i> <span>01-81-8117-8169</span> </li>
-            <li><i class="fa fa-envelope"></i> <a style="color: inherit;" href="mailto:photomaticmx@gmail.com">photomaticmx@gmail.com</a> </li>
-            <li> <a style="color: inherit;"href="https://www.facebook.com/photomaticmx/"> <i class="fab fa-facebook"></i> Photomatic MX </a></li>
-            <li> <a style="color: inherit;" href="https://www.instagram.com/photomaticmx/"> <i class="fab fa-instagram"></i> Photomaticmx </a></li>
-            <li></li>
-          </ul>
         </div>
       </div>
-		</div>
-	</div>
-</div>
+    </div>
+  </section>
+  <!-- Breadcrumb Area End -->
+
+  <!-- Contact Area Start -->
+  <div class="contact-area section-padding-80-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <h2 class="contact-title mb-30">Trabajemos <br />Juntos</h2>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <!-- Contact Info -->
+          <div class="contact-info mb-30">
+            <p>Email</p>
+            <a href="mailto:alfredocruz1096@gmail.com"
+              >alfredocruz1096@gmail.com</a
+            >
+          </div>
+          <!-- Contact Info -->
+          <div class="contact-info mb-30">
+            <p>Redes sociales</p>
+            <a href="https://www.instagram.com/az_works_/"
+              ><i class="ti-instagram" aria-hidden="true"></i
+              ><span> Az_Works_</span></a
+            >
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3">
+          <!-- Contact Info -->
+          <div class="contact-info mb-30">
+            <p>Nos encontramos en:</p>
+            <a href="#">Monterrey, Nuevo León México.</a>
+          </div>
+          <div class="contact-info mb-30">
+            <div id="map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230187.55063637407!2d-100.4431796045147!3d25.648728129359352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86629531b437f8f5%3A0xa3d3d3ca6ac89894!2sMonterrey%2C+N.L.%2C+M%C3%A9xico!5e0!3m2!1ses!2sbd!4v1554409090850!5m2!1ses!2sbd"
+                frameborder="0"
+                style="border:0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Contact Area End -->
+
+  <div class="comment-area section-padding-0-80">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <!-- Leave A Reply -->
+          <div class="alime-contact-form mt-50">
+            <h4 class="mb-30">Mandanos un mensaje</h4>
+
+            <!-- Form -->
+            <form method="post" id="sendEmail">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control mb-30"
+                    placeholder="Tu Nombre"
+                  />
+                </div>
+                <div class="col-12 col-md-6">
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control mb-30"
+                    placeholder="Tu Correo"
+                  />
+                </div>
+                <div class="col-12">
+                  <input
+                    type="text"
+                    name="subject"
+                    class="form-control mb-30"
+                    placeholder="Asunto"
+                  />
+                </div>
+                <div class="col-12">
+                  <textarea
+                    name="message"
+                    class="form-control mb-30"
+                    placeholder="Redacta tu Mensaje"
+                  ></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn alime-btn btn-2 mt-15">
+                    Enviar Mensaje
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

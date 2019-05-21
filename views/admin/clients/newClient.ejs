@@ -1,0 +1,53 @@
+<% layout('./admin') -%>
+<div class="row">
+  <div class="col-lg-12 mt-5">
+    <div class="card">
+      <div class="card-body">
+        <div class="media-body">
+          <h4 class="mb-3">Nuevo Cliente</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 mt-5">
+    <div class="card">
+      <form method="post">
+      <div class="card-body">
+        <h4 class="header-title">Ingresa la informacion Solicitada</h4>
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Nombre(s)</label>
+          <input class="form-control" type="text" id="titulo-input" name="nombre">
+        </div>
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Apellido(s)</label>
+          <input class="form-control" type="text" id="titulo-input" name="apellidos">
+        </div>
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Correo Electronico</label>
+          <input class="form-control" type="email" id="titulo-input" name="correo">
+        </div>
+        <div class="form-group">
+          <label for="titulo-input" class="col-form-label">Telefono</label>
+          <input class="form-control" type="tel" id="titulo-input" name="telefono">
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Paquete Seleccionado</label>
+            <select class="custom-select" id="servicio" name="servicio">
+                <option selected="selected">Seleccione el paquete</option>
+                <%for (var i = 0; i < data.length; i++) {%>
+                <option value="<%= data[i]._id %>"><%= data[i].nombre %></option>
+                <% } %>
+            </select>
+        </div>
+        <div style="text-align:center;">
+          <button type="submit" class="btn btn-primary mb-3 col-sm-4 order-4 " >
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+</div>

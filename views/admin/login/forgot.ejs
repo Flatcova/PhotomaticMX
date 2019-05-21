@@ -1,0 +1,45 @@
+<% layout('account') -%>
+<div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div
+          class="login100-more"
+          style="background-image: url('assets/img/login-img/about8.jpg');"
+        ></div>
+        <form method="post" class="login100-form validate-form reset-form">
+          <span class="login100-form-title p-b-34">
+            ¿Olvidaste tu contraseña?
+          </span>
+          <div class="w-full text-center">
+            <span class="txt1"
+              >Ingresa tu correo para recuperar tu contraseña.
+            </span>
+          </div>
+          <div
+            class="wrap-input100 rs1-wrap-input100-single validate-input m-b-20"
+            data-validate="Type user name"
+          >
+            <input
+              id="first-name"
+              class="input100"
+              type="text"
+              name="email"
+              placeholder="Email"
+            />
+            <span class="focus-input100"></span>
+          </div>
+          <div class="container-login100-form-btn">
+            <button type="submit" class="login100-form-btn">Enviar</button>
+          </div>
+          <div class="w-full text-center p-t-27 p-b-150">
+            <span class="txt1">¿Ya tienes cuenta? Entra </span>
+
+            <a href="{{pathFor route='login'}}" class="txt2"> aquí </a>
+          </div>
+          <div class="w-full text-center">
+            <span class="txt2">2019 &copy; Az-Works Photography.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

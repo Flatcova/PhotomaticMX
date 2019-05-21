@@ -8,17 +8,20 @@
         <p>Ingresa los datos para agregar un nuevo administrador.</p>
 
         <% if (errors.length > 0) { %>
-          <div class="alert alert-danger">
-            <h3><%= errors %></h3>
-            <p class="text-muted">¿Tienes alguna duda?, <a href="contact.html">Contactanos</a>, estamos a tu disposicion para ayudarte.</p>
+          <div class="alert alert-danger" role="alert">
+              <strong>Error!</strong> <%= errors %>
           </div>
           <% } %>
           <hr>
 
           <form method="post">
             <div class="form-group">
-              <label>Nombre Completo</label>
-              <input required type="text" class="form-control" id="name" placeholder="Ej. Juan Martinez Lopez"name="name">
+              <label>Nombre</label>
+              <input required type="text" class="form-control" id="firstName" placeholder="Ej. Juan Jose"name="firstName">
+            </div>
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input required type="text" class="form-control" id="lastName" placeholder="Ej. Martinez Lopez"name="lastName">
             </div>
             <div class="form-group">
               <label>Correo</label>
@@ -26,8 +29,12 @@
               placeholder="Ej. ejemplo@gmail.com" name="email">
             </div>
             <div class="form-group">
-              <label>Password</label>
+              <label>Constraseña</label>
               <input required type="password" name="password" class="form-control" id="password">
+            </div>
+            <div class="form-group">
+              <label>Verificar Contraseña</label>
+              <input required type="password" name="password_verf" class="form-control" id="password_verf">
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Registrate</button>
@@ -40,8 +47,6 @@
       <div class="col-md-12">
         <div class="box">
           <h1>Administradores Registrados</h1>
-
-          <h4 class="text-center">Categorias Disponibles</h4>
           <table class="table">
             <thead>
               <tr>
@@ -53,10 +58,10 @@
             <tbody>
               <%for (var i = 0; i < data.length; i++) {%>
                 <tr>
-                  <td><%= data[i].profile.local.name %></td>
+                  <td><%= data[i].profile.local.username %></td>
                   <td><%= data[i].profile.local.email %></td>
                   <td><%= data[i].profile.admin %></td>
-                  <td><a href="/admin/administradores/delete?id=<%= data[i].id %>" class="btn btn-primary">Eliminar</a></td>
+                  <td><a href="/admin/administradores/delete?id=<%= data[i]._id %>" class="btn btn-primary">Eliminar</a></td>
                 </tr>
                 <% } %>
               </tbody>
